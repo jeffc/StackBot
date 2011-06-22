@@ -381,8 +381,8 @@ int handlemsg(char* params, irc_reply_data* hostd, void* conn)
                 }
                 else
                 {
-                    irc->privmsg(hostd->target, "Or'd");
-                    thestack->push(new stackentry(a->i|b->i));
+                    irc->privmsg(hostd->target, "And'd");
+                    thestack->push(new stackentry(a->i&b->i));
                 }
             }
         }
