@@ -1,0 +1,12 @@
+▞▀▖▐        ▌  ▛▀▖   ▐  
+▚▄ ▜▀ ▝▀▖▞▀▖▌▗▘▙▄▘▞▀▖▜▀ 
+▖ ▌▐ ▖▞▀▌▌ ▖▛▚ ▌ ▌▌ ▌▐ ▖
+▝▀  ▀ ▝▀▘▝▀ ▘ ▘▀▀ ▝▀  ▀ 
+=========================
+
+This is a stack machine implemented as an IRC Bot.
+
+It is very work-in-progress.
+
+(C) 2011 Jeff Cooper
+Except for IRC.h and IRC.cc, which came from the Non-GNU project
