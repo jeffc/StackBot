@@ -31,6 +31,15 @@ stackentry::stackentry(std::string st)
 	}
 }
 
+stackentry::stackentry(stackentry* old) //copy constructor
+{
+	mytype = old->mytype;
+	f = old->f;
+	i = old->i;
+	s = old->s;
+	o = old->o;
+}
+
 stackentry::stackentry(int x)
 {
     mytype=S_INT;

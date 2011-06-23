@@ -13,6 +13,7 @@ class stackentry
 {
 	public:
 		stackentry(std::string s);
+		stackentry(stackentry* old); //copy constructor
                 stackentry(int x);
                 stackentry(float y);
 		enum POSSIBLESTACKENTRIES mytype;
