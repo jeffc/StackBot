@@ -26,6 +26,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#ifndef __CPIRC_VERSION__
+
 #define __CPIRC_VERSION__	0.1
 #define __IRC_DEBUG__ 1
 
@@ -99,3 +101,5 @@ private:
 	channel_user* chan_users;
 	irc_command_hook* hooks;
 };
+
+#endif
