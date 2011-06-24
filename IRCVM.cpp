@@ -51,11 +51,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 S->push(new stackentry(out3[2]));
                 if(printing)
                     irc->privmsg(hostd->target, "pushed %s", S->peek()->print().c_str());
+		return true;
             }
             else
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Sorry, %s, the usage is #MYNICKNAME: pushi <value>", hostd->nick);
+		return false;
             }
         }
         else if(cmd[1] == "pop")
@@ -65,11 +67,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             { 
                 if(printing)
                     irc->privmsg(hostd->target, "The stack is empty!");
+		return false;
             }
             else
             {
                 if(printing)
                     irc->privmsg(hostd->target, "popped %s", entry->print().c_str());
+		return true;
             }
         }
         else if(cmd[1] == "peek")
@@ -79,11 +83,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "The stack is empty!");
+		return false;
             }
             else
             {
                 if(printing)
                     irc->privmsg(hostd->target, "top of the stack is %s", entry->print().c_str());
+		return true;
             }
         }
         else if(cmd[1] == "inc")
@@ -93,11 +99,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "The stack is empty!");
+		return false;
             }
             else if(entry->mytype != S_INT && entry->mytype != S_FLOAT)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Top of the stack is not a number!");
+		return false;
             }
             else
             {
@@ -111,6 +119,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     entry->f++;
                 }
+		return true;
             }
         }
         else if(cmd[1] == "dec")
@@ -120,11 +129,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "The stack is empty!");
+		return false;
             }
             else if(entry->mytype != S_INT && entry->mytype != S_FLOAT)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Top of the stack is not a number!");
+		return false;
             }
             else
             {
@@ -138,6 +149,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     entry->f--;
                 }
+		return true;
             }
         }
         else if(cmd[1] == "add")
@@ -146,6 +158,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return false;
             }
             else
             {
@@ -155,11 +168,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "The stack is empty!");
+		    return false;
                 }
                 else if(!a->isNumber() || !b->isNumber())
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Top of the stack is not a number!");
+		    false;
                 }
                 else
                 {
@@ -170,6 +185,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                         S->push(new stackentry((int)val));
                     else
                         S->push(new stackentry(val));
+		    return true;
                 }
             }
         }
@@ -179,6 +195,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return false;
             }
             else
             {
@@ -188,11 +205,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "The stack is empty!");
+		    return false;
                 }
                 else if(!a->isNumber() || !b->isNumber())
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Top of the stack is not a number!");
+		    return false;
                 }
                 else
                 {
@@ -203,6 +222,8 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                         S->push(new stackentry((int)val));
                     else
                         S->push(new stackentry(val));
+
+		    return true;
                 }
             }
         }
@@ -212,6 +233,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return false;
             }
             else
             {
@@ -221,11 +243,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "The stack is empty!");
+		    return false;
                 }
                 else if(!a->isNumber() || !b->isNumber())
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Top of the stack is not a number!");
+		    return false;
                 }
                 else
                 {
@@ -236,6 +260,8 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                         S->push(new stackentry((int)val));
                     else
                         S->push(new stackentry(val));
+
+		    return true;
                 }
             }
         }
@@ -245,6 +271,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return false;
             }
             else
             {
@@ -254,11 +281,13 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "The stack is empty!");
+		    return false;
                 }
                 else if(!a->isNumber() || !b->isNumber())
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Top of the stack is not a number!");
+		    return false;
                 }
                 else
                 {
@@ -266,6 +295,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                     {
                         if(printing)
                             irc->privmsg(hostd->target, "Error: Universe Implosion");
+			return false;
                     }
                     else
                     {
@@ -276,6 +306,8 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                             S->push(new stackentry((int)val));
                         else
                             S->push(new stackentry(val));
+
+			return true;
                     }
                 }
             }
@@ -286,6 +318,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return false;
             }
             else
             {
@@ -294,18 +327,21 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "The stack is empty!");
+		    return false;
                 }
                 else if(a->mytype != S_INT)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Top of the stack is not an integer!");
                     S->push(a);
+		    return false;
                 }
                 else
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Shifted");
                     S->push(new stackentry(a->i >> 1));
+		    return true;
                 }
             }
         }
@@ -315,6 +351,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return false;
             }
             else
             {
@@ -323,18 +360,21 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "The stack is empty!");
+		    return false;
                 }
                 else if(a->mytype != S_INT)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Top of the stack is not an integer!");
                     S->push(a);
+		    return true;
                 }
                 else
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Shifted");
                     S->push(new stackentry(a->i << 1));
+		    return true;
                 }
             }
         }
@@ -344,6 +384,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return false;
             }
             else
             {
@@ -353,6 +394,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		    return false;
                 }
                 else if(a->mytype != S_INT || b->mytype != S_INT)
                 {
@@ -360,12 +402,16 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                         irc->privmsg(hostd->target, "Top of the stack is not an integer!");
                     S->push(a);
                     S->push(b);
+
+		    return false;
                 }
                 else
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "And'd");
                     S->push(new stackentry(a->i&b->i));
+		    
+		    return true;
                 }
             }
         }
@@ -375,6 +421,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
             {
                 if(printing)
                     irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		return true;
             }
             else
             {
@@ -384,6 +431,7 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Not enough entries on the stack!");
+		    return false;
                 }
                 else if(a->mytype != S_INT || b->mytype != S_INT)
                 {
@@ -391,12 +439,16 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                         irc->privmsg(hostd->target, "Top of the stack is not an integer!");
                     S->push(a);
                     S->push(b);
+
+		    return false;
                 }
                 else
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Or'd");
                     S->push(new stackentry(a->i|b->i));
+		    
+		    return true;
                 }
             }
         }
@@ -411,17 +463,21 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                     S->push(new stackentry(registers[out3[2][0]]));
                     if(printing)
                         irc->privmsg(hostd->target, "pushed");
+		    return true;
                 }
                 else
                 {
                     if(printing)
                         irc->privmsg(hostd->target, "Register contains nothing!");
+
+		    return false;
                 }
             }
             else
             {
                 if(printing)
-                    irc->privmsg(hostd->target, "Sorry, %s, the usage is #MYNICKNAME: push <register>", hostd->nick);
+                    irc->privmsg(hostd->target, "Sorry, %s, the usage is #MYNICKNAME: push <register> (registers are A-Z)", hostd->nick);
+		return false;
             }
         }
         if(cmd[1] == "ldi")
@@ -432,21 +488,25 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
                 setRegister(out3[2][0], new stackentry(out3[3]));
                 if(printing)
                     irc->privmsg(hostd->target, "loaded");
+		return true;
             }
             else
             {
                 if(printing)
-                    irc->privmsg(hostd->target, "Sorry, %s, the usage is #MYNICKNAME: ldi <register> <value>", hostd->nick);
+                    irc->privmsg(hostd->target, "Sorry, %s, the usage is #MYNICKNAME: ldi <register> <value> (registers are A-Z)", hostd->nick);
+		return false;
             }
         }
         else if(cmd[1] == "prtoff")
         {
             printing=false;
+	    return true;
         }
         else if(cmd[1] == "prton")
         {
             printing=true;
             irc->privmsg(hostd->target, "Printing enabled");
+	    return true;
         }
     }            
 }
