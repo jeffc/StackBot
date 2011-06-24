@@ -497,6 +497,33 @@ bool IRCVM::handleCommand(std::string params, irc_reply_data* hostd)
 		return false;
             }
         }
+        if(cmd[1] == "popr")
+        {
+            if(cmd.size() >= 3)
+            {
+                vector<string> out3 = stringsplit_n(string(params), " \n", 2);
+                stackentry* a = S->pop();
+
+                if(a == NULL)
+                {
+                    if(printing)
+                        irc->privmsg(hostd->target, "Nothing on the stack!");
+                    return false;
+                }
+                else
+                {
+                    setRegister(out3[2][0], a);
+                    if(printing)
+                        irc->privmsg(hostd->target, "Popped");
+                }
+            }
+            else
+            {
+                if(printing)
+                    irc->privmsg(hostd->target, "Sorry, %s, the usage is #MYNICKNAME: push <register> (registers are A-Z)", hostd->nick);
+		return false;
+            }
+        }
         else if(cmd[1] == "prtoff")
         {
             printing=false;
